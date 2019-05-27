@@ -13,16 +13,22 @@ from aiohttp import web
 from pymongo import ReturnDocument
 from motor.motor_asyncio import AsyncIOMotorClient
 
+NAME = os.getenv("NAME", "py-server")
+HOST = os.getenv("HOST", "localhost")
+PROCESS_COUNT = os.getenv("PROCESS_COUNT")
+if PROCESS_COUNT:
+    PROCESS_COUNT = int(PROCESS_COUNT)
+
 
 def main():
     """
     start the server
     """
-    mongo_client = AsyncIOMotorClient()
+    mongo_client = AsyncIOMotorClient(HOST)
     coll = mongo_client.customers.counts
 
     loop = asyncio.get_event_loop()
-    executor = ProcessPoolExecutor()
+    executor = ProcessPoolExecutor(PROCESS_COUNT)
 
     async def handle_get(request):
         """
@@ -55,8 +61,9 @@ def main():
                 {
                     "name": name,
                     "count": count_data["count"],
-                    "favoriate number": completed_work["value"],
+                    "favoriate-number": completed_work["value"],
                     "process": completed_work["process"],
+                    "host-name": NAME,
                 }
             )
         )
