@@ -24,7 +24,7 @@ export interface data {
 
 function Results(props: {data: data}) {
   return (
-    <table>
+    <table className="striped">
       <thead>
         <tr>
           <th>Key</th>
