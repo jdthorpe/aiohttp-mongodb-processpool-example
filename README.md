@@ -82,7 +82,7 @@ docker container run -d --name py-service2 -e "HOST=my-mongod" -e "PROCESS_COUNT
 docker container run -d --name proxy -p 8080:8080 --rm --net bridge --net mynet -v $(pwd)/ui/build:/www/data:ro -v $(pwd):/etc/nginx:ro nginx
 
 # Make a few queries
-for run in {1..5}; do curl localhost:19191/Hello; done
+for run in {1..5}; do curl localhost:8080/d/Hello; done
 ```
 
 
@@ -95,6 +95,8 @@ This will print something like the following to the console:
 {"name": "Hello", "count": 28, "favoriate number": 86, "process": 15, "host-name": "py-server-1"}
 {"name": "Hello", "count": 29, "favoriate number": 86, "process": 14, "host-name": "py-server-2"}
 ```
+
+or better yet, open your browser to [localhost:8080]
 
 Clean up:
 ```bash
