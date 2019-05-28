@@ -80,6 +80,7 @@ docker container run -d --name py-service1 -e "HOST=my-mongod" -e "PROCESS_COUNT
 docker container run -d --name py-service2 -e "HOST=my-mongod" -e "PROCESS_COUNT=3" -e "NAME=py-server-2" --rm --net mynet py-service
 docker container run -d --name proxy -p 19191:8080 --rm --net bridge --net mynet -v $(pwd):/etc/nginx:ro nginx
 
+# Make a few queries
 for run in {1..5}; do curl localhost:19191/Hello; done
 ```
 
