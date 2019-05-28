@@ -1,6 +1,20 @@
 import React from 'react';
 
-const keys: string[] = ['Name', 'favorite-number'];
+const keys: string[] = [
+  'name',
+  'count',
+  'favoriate number',
+  'host name',
+  'process',
+];
+
+const labels: {[x: string]: string} = {
+  name: 'Query',
+  count: 'Query Count',
+  'favoriate number': 'Ideal Favoriate Number',
+  'host name': 'Container',
+  process: 'Process ID',
+};
 
 export interface data {
   [x: string]: string;
@@ -21,7 +35,7 @@ function Results(props: {data: data}) {
       <tbody>
         {keys.map(key => (
           <tr>
-            <td>{key}</td>
+            <td>{labels[key]}</td>
             <td>{props.data[key]}</td>
           </tr>
         ))}

@@ -17,6 +17,7 @@ docker container run -d --name my-mongod -p 27017:27017 --rm mongo
 python app.py
 ```
 
+
 Then in browser, visit `http://localhost:1919/Hello` and you'll be treated with
 a response like the following, with 
 * the requested resource path, 
@@ -78,11 +79,12 @@ docker network create mynet
 docker container run -d --name my-mongod --rm --net mynet mongo
 docker container run -d --name py-service1 -e "HOST=my-mongod" -e "PROCESS_COUNT=3" -e "NAME=py-server-1" --rm --net mynet py-service
 docker container run -d --name py-service2 -e "HOST=my-mongod" -e "PROCESS_COUNT=3" -e "NAME=py-server-2" --rm --net mynet py-service
-docker container run -d --name proxy -p 19191:8080 --rm --net bridge --net mynet -v $(pwd):/etc/nginx:ro nginx
+docker container run -d --name proxy -p 8080:8080 --rm --net bridge --net mynet -v $(pwd)/ui/build:/www/data:ro -v $(pwd):/etc/nginx:ro nginx
 
 # Make a few queries
 for run in {1..5}; do curl localhost:19191/Hello; done
 ```
+
 
 This will print something like the following to the console:
 
@@ -98,5 +100,7 @@ Clean up:
 ```bash
 docker container stop proxy my-mongod py-service1 py-service2
 ```
-
+<!--
+curl -d '{"name":"Hello"}' -H "Content-Type: application/json" -X POST http://localhost:8080/d/
+-->
 
