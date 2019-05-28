@@ -3,16 +3,16 @@ import React from 'react';
 const keys: string[] = [
   'name',
   'count',
-  'favoriate number',
-  'host name',
+  'favoriate-number',
+  'host-name',
   'process',
 ];
 
 const labels: {[x: string]: string} = {
   name: 'Query',
   count: 'Query Count',
-  'favoriate number': 'Ideal Favoriate Number',
-  'host name': 'Container',
+  'favoriate-number': 'Ideal Favorite Number',
+  'host-name': 'Container',
   process: 'Process ID',
 };
 
