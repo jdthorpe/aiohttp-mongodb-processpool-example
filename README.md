@@ -104,5 +104,13 @@ docker container stop proxy my-mongod py-service1 py-service2
 ```
 <!--
 curl -d '{"name":"Hello"}' -H "Content-Type: application/json" -X POST http://localhost:8080/d/
+
+pushd ui
+yarn build
+popd
+cp -r ui\build\ load-balancer\
+docker build .\load-balancer\ -t load-balancer
+docker container run -d --name proxy -p 8080:8080 --rm --net bridge --net mynet load-balancer
+
 -->
 
